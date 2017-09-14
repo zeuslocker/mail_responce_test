@@ -20,6 +20,10 @@ class Routes
     def user_tags_path
       'api/v1/users-tags'
     end
+
+    def leads_import_path
+      'api/v1/leads/import'
+    end
   end
 
   private_class_method :users_path, :user_tags_path

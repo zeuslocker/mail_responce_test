@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'json'
 require_relative 'routes'
+require_relative 'models/user'
 
 class UserCreator
   attr_reader :user_count
@@ -15,7 +16,8 @@ class UserCreator
   def perform
     [].tap do |result|
       user_count.times do
-        result << "#{BEARER} #{JSON.parse(send_request.body)['access_token']}"
+        result << User.new(@index, "#{BEARER} #{JSON.parse(send_request.body)['access_token']}")
+        @index += 1
       end
     end
   end
@@ -27,20 +29,18 @@ class UserCreator
   end
 
   def random_user_json
-    result = {
-        user: {
-          email: random_user_email,
-          password: DEFAULT_PASSWORD,
-          passwordConfirmation: DEFAULT_PASSWORD
-        },
-        registration: {
-          email: random_user_email,
-          password: DEFAULT_PASSWORD,
-          passwordConfirmation: DEFAULT_PASSWORD
-        }
+    {
+      user: {
+        email: random_user_email,
+        password: DEFAULT_PASSWORD,
+        passwordConfirmation: DEFAULT_PASSWORD
+      },
+      registration: {
+        email: random_user_email,
+        password: DEFAULT_PASSWORD,
+        passwordConfirmation: DEFAULT_PASSWORD
+      }
     }
-    @index += 1
-    result
   end
 
   def random_user_email
