@@ -13,6 +13,10 @@ class RunOptions
         opts.on('-i', '--import', 'Test leads import') do |import|
           result[:import] = import
         end
+
+        opts.on('-b', '--broadcast', 'Test broadcast sending') do |broadcast|
+          result[:broadcast] = broadcast
+        end
       end.parse!
     end
   end

@@ -1,5 +1,6 @@
 require_relative 'run_options'
 require_relative 'import_testing'
+require_relative 'broadcast_testing'
 require 'pry'
 
 options = RunOptions.call
