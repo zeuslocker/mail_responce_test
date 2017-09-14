@@ -8,7 +8,7 @@ class Routes
       method_name = meth.to_s
 
       # join DEFAULT_HOST with appropriate *_path method
-      return DEFAULT_HOST + send(method_name.gsub('_url', '_path')) if method_name.to_s.end_with?('_url')
+      return DEFAULT_HOST + send(method_name.gsub('_url', '_path'), *args) if method_name.to_s.end_with?('_url')
     end
 
     #---------------------------------
@@ -24,7 +24,15 @@ class Routes
     def leads_import_path
       'api/v1/leads/import'
     end
+
+    def broadcasts_path
+      'api/v1/broadcasts'
+    end
+
+    def broadcasts_setup_path(id)
+      "api/v1/broadcasts/#{id}/setup"
+    end
   end
 
-  private_class_method :users_path, :user_tags_path
+  private_class_method :users_path, :user_tags_path, :broadcasts_path
 end
